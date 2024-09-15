@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/AHFn7Vbn)
 # Superjoin Hiring Assignment
 
 ### Welcome to Superjoin's hiring assignment! 🚀
@@ -53,9 +54,26 @@ We have a checklist at the bottom of this README file, which you should update a
 ## Got Questions❓
 Feel free to check the discussions tab, you might get some help there. Check out that tab before reaching out to us. Also, did you know, the internet is a great place to explore? 😛
 
+
+
+
+
+
 We're available at techhiring@superjoin.ai for all queries. 
 
 All the best ✨.
 
 ## Developer's Section
 *Add your video here, and your approach to the problem (optional). Leave some comments for us here if you want, we will be reading this :)*
+
+
+My Approach:-
+1) Form a Google spreadsheet.
+2) Open the Apps script on it.
+3) Create an online accessible MySQL database and log into it.
+4) Write the required functions to fetch details from SQL to sheets and sheets to SQL. For now, they will work only when they are run explicitly.
+5) Set a trigger for 'on edit' for the Google sheet i.e. whenever someone edits the Google sheet the sheet to SQL function will run.
+6) Set a trigger for every minute for the SQL to sheet changing function.
+
+   Note:- The database change is purposefully not reflected as quickly on the Google sheet since the database can cause major updates at once through the code but Google Sheets don't do that(since they are manually updated and the process is slow). Practically speaking updating the whole database on the Google sheet itself will take much more than a second and people using Google Sheets won't be able to work with this.
+   
