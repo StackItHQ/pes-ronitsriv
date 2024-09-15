@@ -77,6 +77,9 @@ function syncGoogleSheetsToMySQL() {
       return; // Exit the function if the structure is incorrect
     }
 
+    // Create a set to track IDs in the Google Sheet
+    var sheetIds = new Set();
+    
     // Process the data rows (skip the header row)
     for (var i = 1; i < data.length; i++) {
       var id = data[i][0];    // ID
@@ -84,7 +87,9 @@ function syncGoogleSheetsToMySQL() {
       var email = data[i][2]; // Email
 
       if (id) {
-        // Check if the record exists
+        sheetIds.add(id); // Track the ID in the sheet
+        
+        // Check if the record exists in the database
         var checkQuery = 'SELECT COUNT(*) AS count FROM example_table WHERE id = ?';
         var checkStmt = conn.prepareStatement(checkQuery);
         checkStmt.setInt(1, id);
@@ -124,6 +129,25 @@ function syncGoogleSheetsToMySQL() {
       }
     }
 
+    // Fetch all IDs from the database and delete records that are not in the sheet
+    var fetchIdsQuery = 'SELECT id FROM example_table';
+    var fetchIdsStmt = conn.createStatement();
+    var dbResults = fetchIdsStmt.executeQuery(fetchIdsQuery);
+    
+    while (dbResults.next()) {
+      var dbId = dbResults.getInt('id');
+      if (!sheetIds.has(dbId)) {
+        // If the ID in the database is not found in the Google Sheet, delete the row
+        var deleteQuery = 'DELETE FROM example_table WHERE id = ?';
+        var deleteStmt = conn.prepareStatement(deleteQuery);
+        deleteStmt.setInt(1, dbId);
+        var rowsDeleted = deleteStmt.executeUpdate();
+        Logger.log('Deleted entry with ID: ' + dbId + ', Rows deleted: ' + rowsDeleted);
+        deleteStmt.close();
+      }
+    }
+    fetchIdsStmt.close();
+
   } catch (e) {
     Logger.log('Error: ' + e.message);
   } finally {
@@ -132,5 +156,3 @@ function syncGoogleSheetsToMySQL() {
     }
   }
 }
-
-
