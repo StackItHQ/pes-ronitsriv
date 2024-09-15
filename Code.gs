@@ -1,3 +1,5 @@
+//the functions to sync Google Sheets to SQL and vice versa
+
 function syncMySQLToGoogleSheets() {
   // Define MySQL connection details
   var server = 'sql12.freemysqlhosting.net';
