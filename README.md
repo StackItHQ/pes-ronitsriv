@@ -71,9 +71,9 @@ My Approach:-
 1) Form a Google spreadsheet.
 2) Open the Apps script on it.
 3) Create an online accessible MySQL database and log into it.
-4) Write the required code to fetch details from SQl to sheets and sheets to SQL. For now, they will work only when they are run explicitly.
+4) Write the required functions to fetch details from SQL to sheets and sheets to SQL. For now, they will work only when they are run explicitly.
 5) Set a trigger for 'on edit' for the Google sheet i.e. whenever someone edits the Google sheet the sheet to SQL function will run.
-6) Set a trigger for every minute for the SQl to sheet changing function.
+6) Set a trigger for every minute for the SQL to sheet changing function.
 
    Note:- The database change is purposefully not reflected as quickly on the Google sheet since the database can cause major updates at once through the code but Google Sheets don't do that(since they are manually updated and the process is slow). Practically speaking updating the whole database on the Google sheet itself will take much more than a second and people using Google Sheets won't be able to work with this.
    
